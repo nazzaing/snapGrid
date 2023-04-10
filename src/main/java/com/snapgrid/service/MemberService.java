@@ -2,7 +2,7 @@ package com.snapgrid.service;
 
 import com.snapgrid.domain.member.Member;
 import com.snapgrid.dto.member.MemberDto;
-import com.snapgrid.repository.MemberRepository;
+import com.snapgrid.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
