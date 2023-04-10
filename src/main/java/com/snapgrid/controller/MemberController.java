@@ -20,7 +20,7 @@ public class MemberController {
 
     @PostMapping(path = "/member/join")
     public String joinProc(MemberDto.Request request) {
-        memberService.join(request);
+        MemberDto.Response joinResult = memberService.join(request);
         return "redirect:/";
     }
 }

@@ -4,6 +4,7 @@ import com.snapgrid.domain.member.Member;
 import com.snapgrid.dto.member.MemberDto;
 import com.snapgrid.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final ModelMapper modelMapper;
 
     @Transactional
-    public Long join(MemberDto.Request request) {
+    public MemberDto.Response join(MemberDto.Request request) {
+
         Member member = Member.builder()
                 .name(request.getName())
                 .password(request.getPassword())
                 .nickname(request.getNickname())
                 .email(request.getEmail())
                 .build();
-        return memberRepository.save(member).getId();
+        memberRepository.save(member);
+
+        return modelMapper.map(member, MemberDto.Response.class);
     }
 
 }
