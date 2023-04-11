@@ -1,4 +1,4 @@
-package com.snapgrid.config;
+package com.snapgrid.common.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

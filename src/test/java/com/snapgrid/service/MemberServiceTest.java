@@ -1,8 +1,8 @@
 package com.snapgrid.service;
 
-import com.snapgrid.domain.member.Member;
-import com.snapgrid.dto.member.MemberDto;
-import com.snapgrid.repository.member.MemberRepository;
+import com.snapgrid.member.domain.Member;
+import com.snapgrid.member.dto.MemberDto;
+import com.snapgrid.member.repository.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

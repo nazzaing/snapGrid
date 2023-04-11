@@ -1,4 +1,4 @@
-package com.snapgrid.config;
+package com.snapgrid.common.config;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.P6SpyOptions;

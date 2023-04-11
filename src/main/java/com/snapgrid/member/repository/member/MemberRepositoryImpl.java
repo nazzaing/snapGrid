@@ -1,10 +1,10 @@
-package com.snapgrid.repository.member;
+package com.snapgrid.member.repository.member;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.snapgrid.domain.member.Member;
-import com.snapgrid.domain.member.QMember;
-import com.snapgrid.dto.member.MemberDto;
+import com.snapgrid.member.domain.Member;
+import com.snapgrid.member.domain.QMember;
+import com.snapgrid.member.dto.MemberDto;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 

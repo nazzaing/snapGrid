@@ -1,7 +1,7 @@
-package com.snapgrid.repository.member;
+package com.snapgrid.member.repository.member;
 
-import com.snapgrid.domain.member.Member;
-import com.snapgrid.dto.member.MemberDto;
+import com.snapgrid.member.domain.Member;
+import com.snapgrid.member.dto.MemberDto;
 
 import java.util.List;
 

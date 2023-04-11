@@ -1,4 +1,4 @@
-package com.snapgrid.dto.member;
+package com.snapgrid.member.dto;
 
 import lombok.Getter;
 import lombok.Setter;

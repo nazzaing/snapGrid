@@ -1,13 +1,13 @@
-package com.snapgrid.controller;
+package com.snapgrid.common.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class MainController {
 
     @GetMapping(path = "/")
     public String home() {
-        return "home";
+        return "main/main";
     }
 }

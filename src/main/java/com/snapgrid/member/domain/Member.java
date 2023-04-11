@@ -1,4 +1,4 @@
-package com.snapgrid.domain.member;
+package com.snapgrid.member.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

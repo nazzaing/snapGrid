@@ -1,7 +1,7 @@
-package com.snapgrid.controller;
+package com.snapgrid.member.controller;
 
-import com.snapgrid.dto.member.MemberDto;
-import com.snapgrid.service.MemberService;
+import com.snapgrid.member.dto.MemberDto;
+import com.snapgrid.member.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberServiceImpl memberService;
 
     @GetMapping(path = "/member/join")
     public String joinForm() {
-        return "home";
+        return "main/main";
     }
 
     @PostMapping(path = "/member/join")
