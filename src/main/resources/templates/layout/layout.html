@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
+<!-- 헤드 -->
+<th:block th:replace="~{layout/fragments/header :: header}"/>
+<!-- /헤드 -->
+<body>
+<div class="text-center">
+    <div class="row">
+        <div class="col-12" style="background-color: #FF3030;">
+            <!-- 상단바 -->
+            <th:block th:replace="~{layout/fragments/bodyHeader :: bodyHeader}"/>
+            <!-- /상단바 -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2" style="background-color: #FF69B4;">
+            <!-- 사이드바 -->
+            <th:block th:replace="~{layout/fragments/sidebar :: sidebar}"/>
+            <!-- /사이드바 -->
+        </div>
+        <div class="col-10" style="background-color: #FFF68F;">
+            <!-- 본문 -->
+            <th:block layout:fragment="content"/>
+            <!-- /본문 -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="background-color: #BFEFFF;">
+            <!-- 하단바 -->
+            <th:block th:replace="~{layout/fragments/bodyFooter :: bodyFooter}"/>
+            <!-- /하단바 -->
+        </div>
+    </div>
+</div>
+<!-- 하단 -->
+<th:block th:replace="~{layout/fragments/footer :: footer}"/>
+<!-- /하단 -->
+</body>
+</html>
