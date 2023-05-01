@@ -20,10 +20,11 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public MemberDto.Response join(MemberDto.Request request) {
         Member member = Member.builder()
-                .name(request.getName())
+                .userId(request.getUserId())
                 .password(request.getPassword())
-                .nickname(request.getNickname())
+                .userName(request.getUserName())
                 .email(request.getEmail())
+                .phone(request.getPhone())
                 .build();
         memberRepository.save(member);
 

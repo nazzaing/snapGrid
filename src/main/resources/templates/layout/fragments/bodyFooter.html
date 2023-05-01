@@ -56,4 +56,42 @@
             </div>
         </div>
     </footer>
+    <div class="container">
+        <div class="bd-docs-body">
+            <div class="bd-docs-content bd-content algolia-content">
+                <div id="modal-login" class="modal">
+                    <div class="modal-background">
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                                <p>로그인</p>
+                                <button class="delete" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                <div class="pt-5">
+                                    <form action="/member/join" id="memberForm" th:object="${memberForm}" method="post">
+                                        <div class="input-group py-0 column is-4-desktop">
+                                            <input class="input" type="text" th:field="*{userId}" placeholder="Id" required>
+                                        </div>
+                                        <div class="input-group py-0 column is-4-desktop">
+                                            <input class="input" type="password" placeholder="Password" th:field="*{password}" required>
+                                        </div>
+                                        <div class="input-group py-0 column is-4-desktop">
+                                            <input class="input" type="text" placeholder="이름" th:field="*{userName}" required>
+                                        </div>
+                                        <div class="input-group py-0 column is-4-desktop">
+                                            <input class="input" type="email" placeholder="이메일" th:field="*{email}" required>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                            <footer class="modal-card-foot">
+                                <button class="button is-success btn-join">로그인</button>
+                                <button class="button button-close">Cancel</button>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </th:block>

@@ -19,17 +19,23 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String name;
+    @Column(name = "user_id",nullable = false, length = 100, unique = true)
+    private String userId;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(nullable = false, length = 50)
-    private String nickname;
+    @Column(name = "user_name", nullable = false, length = 50)
+    private String userName;
 
-    @Column(length = 100)
+    @Column(name = "email", nullable = true, unique = true)
     private String email;
+
+    @Column(name = "phone", nullable = true, unique = true)
+    private String phone;
+
+    @Embedded
+    private Address address;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -38,10 +44,12 @@ public class Member {
     private LocalDateTime updateDate;
 
     @Builder
-    public Member(String name, String password, String nickname, String email) {
-        this.name = name;
+    public Member(String userId, String password, String userName, String email, String phone, Address address) {
+        this.userId = userId;
         this.password = password;
-        this.nickname = nickname;
+        this.userName = userName;
         this.email = email;
+        this.phone = phone;
+        this.address = address;
     }
 }

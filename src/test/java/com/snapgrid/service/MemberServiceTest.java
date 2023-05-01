@@ -21,20 +21,20 @@ class MemberServiceTest {
     void joinAndSearch() {
         //given
         Member member1 = Member.builder()
-                .name("member1")
+                .userId("member1")
                 .password("1234")
-                .email("test@naver.com")
-                .nickname("nick")
+                .email("test@naver1.com")
+                .userName("nick")
                 .build();
         Member member2 = Member.builder()
-                .name("member2")
+                .userId("member2")
                 .password("1234")
-                .email("test@naver.com")
-                .nickname("nick")
+                .email("test@naver2.com")
+                .userName("nick")
                 .build();
 
         MemberDto.Request request = new MemberDto.Request();
-        request.setName("member1");
+        request.setUserId("member1");
         request.setPassword("1234");
 
         //when
@@ -43,7 +43,7 @@ class MemberServiceTest {
 
         //then
         assertEquals(2L, memberRepository.findAll().size());
-        assertEquals(1L, memberRepository.findByNamePasswordOrderByNameDesc(request).size());
+        assertEquals(1L, memberRepository.findByUserIdAndPasswordOrderByUserNameDesc(request.getUserId(), request.getPassword()).size());
     }
 
 }
