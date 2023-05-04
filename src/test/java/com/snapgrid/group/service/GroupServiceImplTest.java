@@ -3,8 +3,7 @@ package com.snapgrid.group.service;
 import com.snapgrid.group.domain.Group;
 import com.snapgrid.group.dto.GroupDto;
 import com.snapgrid.group.repository.GroupRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +48,12 @@ class GroupServiceImplTest {
 
         GroupDto.Response response = groupService.createGroup(request);
 
-
-        Group group1 = groupRepository.findById(response.getGroupId()).get();
-
-        System.out.println(group.getGroupName());
-        System.out.println(group1.getGroupName());
-
+        Assertions.assertThat(response.getGroupId()).isNotNull();
 
     }
 
 
 
-    
+
 
 }
