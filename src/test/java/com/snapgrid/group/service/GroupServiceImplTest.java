@@ -44,7 +44,7 @@ class GroupServiceImplTest {
         ModelMapper modelMapper = new ModelMapper();
 
 
-        GroupDto.Request request = modelMapper.map(group, GroupDto.Request.class);
+        GroupDto.createRequest request = modelMapper.map(group, GroupDto.createRequest.class);
 
         GroupDto.Response response = groupService.createGroup(request);
 
