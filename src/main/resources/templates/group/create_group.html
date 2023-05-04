@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}" lang="ko">
+<th:block layout:fragment="content">
+    <body>
+    <div class="hero is-fullheight">
+        <div class="hero-body is-justify-content-center is-align-items-center">
+            <div class="columns is-flex is-flex-direction-column box">
+
+                <form action="/group" method="post" th:object="${createForm}">
+                    <div class="column">
+                        <label th:for="*{groupName}" >모임 이름</label>
+                        <input th:field="*{groupName}" class="input is-primary" type="text" placeholder="모임명" required>
+                    </div>
+                    <div class="column">
+                        <label th:for="*{introduction}">모임 소개글</label>
+                        <input th:field="*{introduction}" class="input is-primary" type="text" placeholder="모임 소개글">
+                    </div>
+                    <div class="column">
+                        <label th:for="*{address}">모임 장소</label>
+                        <input th:field="*{address}" class="input is-primary" type="text" placeholder="모임 장소">
+                    </div>
+                    <div class="column">
+                        <label th:for="*{category}">모임 카테고리</label>
+                        <input th:field="*{category}" class="input is-primary" type="text" placeholder="모임 주제">
+                    </div>
+                    <div class="column">
+                        <button class="button is-primary" type="submit">생성</button>
+                        <button class="button" type="reset">취소</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</th:block>

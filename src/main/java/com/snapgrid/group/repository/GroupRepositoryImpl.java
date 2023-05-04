@@ -11,4 +11,5 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom{
 
     QGroup group = QGroup.group;
 
+
 }

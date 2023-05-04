@@ -1,5 +1,6 @@
 package com.snapgrid.group.domain;
 
+import com.snapgrid.group.dto.GroupDto;
 import com.snapgrid.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -26,12 +27,16 @@ public class Group {
 
     private String address; // 모임 장소
 
-    //todo 테이블 따로 생성해서 사용
+    //todo 테이블 따로 생성해서 사용?
     private String category; // 모임 카테고리
 
 
     @Column(name = "creator_id")
     private Long creatorId; // 생성자 ID
+
+
+    @Column(name = "updater_id")
+    private Long updaterId; // 수정자 ID
 
     @Column(name = "create_date")
     private LocalDateTime createDate; // 생성일
@@ -41,21 +46,34 @@ public class Group {
     private LocalDateTime updateDate; // 수정일
 
 
-    @OneToMany(mappedBy = "groups")
+    /////////////////
+
+
+    // mapping
+    @OneToMany(mappedBy = "groupId")
     private List<GroupAndMember> groupAndMember = new ArrayList<>();
 
+
+
+    ////////////////
+
+    public void modifyInfo(String groupName, String introduction, String address, String category, Long updaterId, LocalDateTime updateDate){
+
+    }
+
     @Builder
-    public Group(String groupName, String introduction, String address, String category, Long creatorId, LocalDateTime createDate, LocalDateTime updateDate) {
+    public Group(String groupName, String introduction, String address, String category, Long creatorId, Long updaterId, LocalDateTime createDate, LocalDateTime updateDate) {
         this.groupName = groupName;
         this.introduction = introduction;
         this.address = address;
         this.category = category;
         this.creatorId = creatorId;
+        this.updaterId = updaterId;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
 
-    public Group() {
+    protected Group() {
 
     }
 }
