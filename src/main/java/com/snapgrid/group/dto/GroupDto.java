@@ -2,9 +2,7 @@ package com.snapgrid.group.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -25,9 +23,9 @@ public class GroupDto {
         @NotNull
         private String category;
 
-        private LocalDateTime createDate;
+//        private LocalDateTime createDate;
 
-        private LocalDateTime updateDate;
+//        private LocalDateTime updateDate;
 
         private Long creatorId;
     }
@@ -53,7 +51,7 @@ public class GroupDto {
 
         private Long creatorId;
 
-        private LocalDateTime createDate = LocalDateTime.now();
+//        private LocalDateTime createDate = LocalDateTime.now();
     }
 
 
@@ -76,11 +74,31 @@ public class GroupDto {
 
         private Long UpdaterId;
 
-        private LocalDateTime updateDate = LocalDateTime.now();
+//        private LocalDateTime updateDate = LocalDateTime.now();
     }
+
+    /**
+     * 검색 DTO
+     */
+    @Getter
+    @Setter
+    public static class searchRequest{
+        private int pageNum;
+
+        private int pageSize;
+
+        private String groupName;
+
+        private String address;
+
+        private String category;
+    }
+
+
 
     @Getter
     @Setter
+    @ToString(of = {"groupId","groupName","introduction","address","category","createDate","updateDate","creatorId"})
     public static class Response {
         private Long groupId;
 

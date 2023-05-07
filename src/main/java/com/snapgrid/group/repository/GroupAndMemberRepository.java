@@ -1,20 +1,18 @@
 package com.snapgrid.group.repository;
 
+import com.snapgrid.group.domain.Group;
 import com.snapgrid.group.domain.GroupAndMember;
-import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
-@Repository
-@RequiredArgsConstructor
-public class GroupAndMemberRepository {
-
-    private final EntityManager em;
+import com.snapgrid.member.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 
 
-    public void save(GroupAndMember groupAndMember){
-        em.persist(groupAndMember);
-    }
+public interface GroupAndMemberRepository extends JpaRepository<GroupAndMember, Long> {
+
+    Long countByGroupAndMember(@Param("group_id")Group group, @Param("member_id")Member member);
+
+    GroupAndMember findByGroupAndMember(@Param("group_id")Group group, @Param("member_id")Member member);
+
 
 
 }
