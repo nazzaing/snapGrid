@@ -1,9 +1,9 @@
 package com.snapgrid.group.controller;
 
+import com.snapgrid.group.domain.Group;
 import com.snapgrid.group.dto.GroupDto;
+import com.snapgrid.group.dto.groupAndMemberDto;
 import com.snapgrid.group.service.GroupService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +24,17 @@ public class GroupController {
     private final GroupService groupService;
 
 
+
+    // 그룹 목록
+    @GetMapping("/groups")
+    @ResponseBody
+    public List<Group> groupList(@ModelAttribute("searchForm") GroupDto.searchRequest searchForm){
+        //groupService.findGroupListPaging(searchForm);
+
+        return groupService.findGroupListPaging(searchForm);
+
+
+    }
 
     // 그룹 생성 폼
     @GetMapping("/group")
@@ -35,7 +47,7 @@ public class GroupController {
 
     // 그룹 생성
     @PostMapping("/group")
-    public String createGroup(@ModelAttribute  @Valid GroupDto.createRequest dto, BindingResult bindingResult, HttpServletRequest request){
+    public String createGroup(@ModelAttribute  @Valid GroupDto.createRequest dto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             log.error(bindingResult.toString());
@@ -44,13 +56,14 @@ public class GroupController {
 
         /**
          *
-         *  TODO Member ID 가져오는 로직(session,jwt etc...) , 권한 검증
+         *  TODO 권한 검증
          *
          *  ~~~~~
          *
          *  끝
          */
 
+        dto.setCreatorId(getAuth());
 
         groupService.createGroup(dto);
 
@@ -59,6 +72,8 @@ public class GroupController {
     }
 
 
+
+    // 그룹 수정 폼
     @GetMapping("/group/{groupId}")
     public String viewGroup(@PathVariable Long groupId, Model model){
 
@@ -73,14 +88,15 @@ public class GroupController {
 
         GroupDto.Response findGroup = groupService.findGroup(groupId);
 
-        model.addAttribute(findGroup);
+        model.addAttribute("group_form", findGroup);
 
 
         return "group/view_group";
     }
 
 
-    @PatchMapping("/group/{groupId}")
+    // 그룹 수정
+    @PostMapping("/group/{groupId}")
     public String modifyGroup(@PathVariable Long groupId, @ModelAttribute @Valid GroupDto.modifyRequest dto, BindingResult bindingResult, Model model) {
         /**
          * TODO 권한 검증
@@ -104,21 +120,58 @@ public class GroupController {
         groupService.modifyGroup(dto);
 
         return "redirect:/";
+
     }
 
 
     // 그룹 가입
     @PostMapping("/group/join/{groupId}")
-    public String joinMember(@PathVariable Long groupId){
+    public String joinGroup(@PathVariable Long groupId){
 
         /**
          *
-         *  TODO 권한검증, 가입 가능 여부 체크(총 인원수, 그룹 공개비공개 여부 등 추가 예정?)
+         *  TODO 권한검증
          */
 
+        Long userId = getAuth();
+
+        groupAndMemberDto.createRequest requestDto = new groupAndMemberDto.createRequest(groupId,userId,LocalDateTime.now());
+
+
+        groupService.joinGroup(requestDto);
 
 
         return "redirect:/";
+    }
+
+
+    // 그룹 탈퇴
+    @PostMapping("/group/exit/{groupId}")
+    public String exitGroup(@PathVariable Long groupId){
+
+        /**
+         *
+         *  TODO 권한검증
+         */
+        Long userId = getAuth();
+        groupAndMemberDto.deleteRequest requestDto = new groupAndMemberDto.deleteRequest(groupId,userId);
+
+        groupService.exitGroup(requestDto);
+
+        return "redirect:/";
+    }
+
+
+
+
+
+
+
+    // 권한 검증 로직
+    public Long getAuth(){
+
+        // TODO 임시...
+        return Long.valueOf((long) ((Math.random()*30)));
     }
 
 

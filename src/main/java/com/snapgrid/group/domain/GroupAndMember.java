@@ -9,13 +9,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter(AccessLevel.PRIVATE)
-@Table(name = "group_member")
+@Table(name = "group_member",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"group_id", "member_id"})
+        }
+       )
 public class GroupAndMember {
 
 
@@ -28,12 +30,12 @@ public class GroupAndMember {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id")
-    private Group groupId;
+    private Group group;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    private Member  memberId;
+    private Member  member;
 
 
     @Enumerated(EnumType.STRING)
@@ -44,24 +46,26 @@ public class GroupAndMember {
     private LocalDateTime joinDate; // 모임 가입일
 
 
+
     protected GroupAndMember() {
     }
 
     @Builder
-    public GroupAndMember(Group groupId, Member memberId, GroupRole role, LocalDateTime joinDate) {
-        this.groupId = groupId;
-        this.memberId = memberId;
+    public GroupAndMember(Group group, Member member, GroupRole role, LocalDateTime joinDate) {
+        this.group = group;
+        this.member = member;
         this.role = role;
         this.joinDate = joinDate;
     }
     
     
-    public static GroupAndMember createGroupAndMember(Group groupId, Member memberId, GroupRole role, LocalDateTime joinDate){
+    public static GroupAndMember createGroupAndMember(Group group, Member member, GroupRole role){
         GroupAndMember groupAndMember = new GroupAndMember();
-        groupAndMember.addGroups(groupId);
-        groupAndMember.addMember(memberId);
+        groupAndMember.addGroups(group); // group entity 에 this 추가
+        groupAndMember.addMember(member); // member entity 에 this 추가
         groupAndMember.setRole(role);
-        groupAndMember.setJoinDate(joinDate);
+        groupAndMember.setJoinDate(LocalDateTime.now());
+
 
         return groupAndMember;
     }
@@ -69,13 +73,17 @@ public class GroupAndMember {
 
     public void addGroups(Group group){
         group.getGroupAndMember().add(this);
-        this.groupId = group;
+        group.increaseMemberCount();
+        this.group = group;
+
+
+
     }
     
     public void addMember(Member member){
         // TODO MemberEntity 수정 할시 아래 주석 해제
         //member.getGroupAndMember().add(this);
-        this.memberId = member;
+        this.member = member;
         
     }
 }

@@ -65,10 +65,8 @@ public class preSetting {
             for(int i=0; i<30; i++) {
                 Group group = Group.builder()
                         .groupName("이름" + i)
-                        .createDate(LocalDateTime.now())
                         .address("지역" + i)
                         .category("카테고리" + i)
-                        .creatorId(Long.valueOf(i))
                         .introduction("소개글" + i)
                         .updaterId(Long.valueOf(i)).build();
 
